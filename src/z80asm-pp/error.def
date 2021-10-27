@@ -1,0 +1,37 @@
+//-----------------------------------------------------------------------------
+// z80asm preprocessor
+// Copyright (C) Paulo Custodio, 2011-2021
+// License: GPL3 https://www.gnu.org/licenses/gpl-3.0.html
+//-----------------------------------------------------------------------------
+
+X(NoError, "no error")
+
+X(ArgExpected, "argument expected")
+X(CannotWriteFile, "cannot write file")
+X(ColonExpected, "':' expected")
+X(CommaExpected, "',' expected")
+X(ConstExprExpected, "constant expression expected")
+X(DivisionByZero, "division by zero")
+X(DuplicateDefinition, "duplicate definition")
+X(EolExpected, "end of line expected")
+X(EqExpected, "'=' expected")
+X(FileNotFound, "file not found")
+X(IdentExpected, "identifier expected")
+X(IntegerOrSymbolExpected, "integer or symbol expected")
+X(InvalidChar, "invalid character")
+X(InvalidOption, "invalid option")
+X(InvalidSingleQuotedChar, "invalid single quoted character")
+X(LbraceExpected, "'{' expected")
+X(LparenExpected, "'(' expected")
+X(OpenFile, "open file")
+X(RbraceOrCommaExpected, "'}' or ',' expected")
+X(RbraceOrIdentExpected, "'}' or identifier expected")
+X(RecursiveInclude, "recursive include")
+X(RparenOrCommaExpected, "')' or ',' expected")
+X(SizeIdExpected, "'ds.[bwpq]' expected")
+X(StringExpected, "string expected")
+X(StructNesting, "structure nesting")
+X(UnbalancedParens, "unbalanced parens")
+X(WrongNumberMacroArgs, "wrong number of macro arguments")
+
+#undef X
