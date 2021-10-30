@@ -9,9 +9,9 @@
 #include <string>
 using namespace std;
 
-// needs C++17
-#include <filesystem>
-namespace fs = filesystem;
+// ghc::filesystem instead of C++17 filesystem
+#include <ghc/filesystem.hpp>
+namespace fs = ghc::filesystem;
 
 // change case
 string str_tolower(string str);
