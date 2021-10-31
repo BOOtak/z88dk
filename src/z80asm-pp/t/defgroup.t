@@ -70,5 +70,20 @@ l1:
 defc a2=2
 END_I
 
+asmpp_ok("", "", "", <<END_ASM, <<END_I);
+defgroup { 
+line 1
+line 1,"x.asm"
+c_line 1
+c_line 1,"x.c"
+a2=2 
+}
+END_ASM
+line 1,"x.asm"
+c_line 1
+c_line 1,"x.c"
+defc a2=2
+END_I
+
 unlink_testfiles;
 done_testing;

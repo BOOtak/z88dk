@@ -1416,6 +1416,10 @@ void Preproc::do_defgroup() {
 	while (true) {
 		next_token_getline();
 
+		// check for LINE/C_LINE
+		if (check_line() || check_c_line())
+			continue;
+		
 		// get name[=expression]
 		string name = expect_ident();
 		if (lexer().peek().ttype == TType::Eq) {
@@ -1464,6 +1468,10 @@ void Preproc::do_defvars() {
 	int value = origin < 0 ? m_defvars_value : origin;
 	while (true) {
 		next_token_getline();
+
+		// check for LINE/C_LINE
+		if (check_line() || check_c_line())
+			continue;
 
 		// get [name] size_id count
 		string name;

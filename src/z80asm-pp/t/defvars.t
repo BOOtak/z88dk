@@ -180,5 +180,20 @@ defc a3=102
 defc a4=103
 END_I
 
+asmpp_ok("", "", "", <<END_ASM, <<END_I);
+defvars 100 {
+line 1
+line 1,"x.asm"
+c_line 1
+c_line 1,"x.c"
+a1 ds.b 1
+}
+END_ASM
+line 1,"x.asm"
+c_line 1
+c_line 1,"x.c"
+defc a1=100
+END_I
+
 unlink_testfiles;
 done_testing;
