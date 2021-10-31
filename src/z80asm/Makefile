@@ -40,10 +40,11 @@ TEST_SRC_LIB	:= t/testlib.c
 # variables
 #------------------------------------------------------------------------------
 OPT 		= -O3
+#OPT			= -g
 
 STD 		= -std=gnu11
 LOCAL_LIB	:= lib
-LOCAL_CFLAGS 	+= -MMD -I. -I$(LOCAL_LIB) -It -g -Wall $(STD) $(OPT) \
+LOCAL_CFLAGS 	+= -MMD -I. -I$(LOCAL_LIB) -It -Wall $(STD) $(OPT) \
 		   -I../common \
 		   -I../../ext/optparse \
 		   -I../../ext/regex \

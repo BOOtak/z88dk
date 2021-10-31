@@ -13,9 +13,10 @@ else
 endif
 
 CXX		?= g++
-OPT		= 
-CXXFLAGS+= -g -Wall -Wextra -Werror -pedantic-errors -std=gnu++14 -MMD \
-		   -I../../ext/filesystem/include $(OPT)
+OPT		= -O3
+#OPT		= -g
+
+CXXFLAGS+= -Wall -Wextra -Werror -pedantic-errors -std=gnu++17 -MMD $(OPT)
 RE2C	= re2c -W --tags --no-debug-info --no-generation-date 
 INSTALL	?= install
 ASTYLE	= astyle --style=attach --pad-oper --align-pointer=type \
