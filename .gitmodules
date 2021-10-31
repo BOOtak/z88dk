@@ -16,6 +16,3 @@
 [submodule "ext/cpm"]
 	path = ext/cpm
 	url = https://github.com/z88dk/cpm.git
-[submodule "ext/filesystem"]
-	path = ext/filesystem
-	url = https://github.com/gulrak/filesystem.git
