@@ -6,35 +6,30 @@ asmpp_nok("", <<END_ASM, <<END_ERR);
 defc
 END_ASM
 $test.asm:1: error: identifier expected
-z88dk-z80asm-pp found 1 error.
 END_ERR
 
 asmpp_nok("", <<END_ASM, <<END_ERR);
 defc start
 END_ASM
 $test.asm:1: error: '=' expected
-z88dk-z80asm-pp found 1 error.
 END_ERR
 
 asmpp_nok("", <<END_ASM, <<END_ERR);
 defc start=
 END_ASM
 $test.asm:1: error: integer or symbol expected
-z88dk-z80asm-pp found 1 error.
 END_ERR
 
 asmpp_nok("", <<END_ASM, <<END_ERR);
 defc start=1+
 END_ASM
 $test.asm:1: error: integer or symbol expected
-z88dk-z80asm-pp found 1 error.
 END_ERR
 
 asmpp_nok("", <<END_ASM, <<END_ERR);
 defc start=1,
 END_ASM
 $test.asm:1: error: end of line expected
-z88dk-z80asm-pp found 1 error.
 END_ERR
 
 asmpp_nok("", <<END_ASM, <<END_ERR);
@@ -42,7 +37,6 @@ defc start=1
 defc start=1
 END_ASM
 $test.asm:2: error: duplicate definition: start
-z88dk-z80asm-pp found 1 error.
 END_ERR
 
 asmpp_ok("", "", "", <<END_ASM, <<END_I);

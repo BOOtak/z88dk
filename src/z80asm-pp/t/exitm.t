@@ -6,7 +6,6 @@ asmpp_nok("", <<END_ASM, <<END_ERR);
 exitm
 END_ASM
 $test.asm:1: error: structure nesting
-z88dk-z80asm-pp found 1 error.
 END_ERR
 
 asmpp_nok("", <<END_ASM, <<END_ERR);
@@ -16,7 +15,6 @@ endm
 m1
 END_ASM
 $test.asm:4: error: end of line expected
-z88dk-z80asm-pp found 1 error.
 END_ERR
 
 asmpp_ok("", "", "", <<END_ASM, <<END_I);

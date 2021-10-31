@@ -6,28 +6,24 @@ asmpp_nok("", <<END_ASM, <<END_ERR);
 rept
 END_ASM
 $test.asm:1: error: integer or symbol expected
-z88dk-z80asm-pp found 1 error.
 END_ERR
 
 asmpp_nok("", <<END_ASM, <<END_ERR);
 rept 2!
 END_ASM
 $test.asm:1: error: end of line expected
-z88dk-z80asm-pp found 1 error.
 END_ERR
 
 asmpp_nok("", <<END_ASM, <<END_ERR);
 rept 2
 END_ASM
 $test.asm:2: error: structure nesting
-z88dk-z80asm-pp found 1 error.
 END_ERR
 
 asmpp_nok("", <<END_ASM, <<END_ERR);
 endr
 END_ASM
 $test.asm:1: error: structure nesting
-z88dk-z80asm-pp found 1 error.
 END_ERR
 
 asmpp_nok("", <<END_ASM, <<END_ERR);
@@ -35,14 +31,12 @@ rept 3
 rept 3
 END_ASM
 $test.asm:2: error: structure nesting
-z88dk-z80asm-pp found 1 error.
 END_ERR
 
 asmpp_nok("", <<END_ASM, <<END_ERR);
 rept asmpp
 END_ASM
 $test.asm:1: error: constant expression expected
-z88dk-z80asm-pp found 1 error.
 END_ERR
 
 asmpp_ok("", "", "", <<END_ASM, <<END_I);

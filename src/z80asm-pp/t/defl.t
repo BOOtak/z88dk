@@ -6,28 +6,24 @@ asmpp_nok("", <<END_ASM, <<END_ERR);
 defl
 END_ASM
 $test.asm:1: error: identifier expected
-z88dk-z80asm-pp found 1 error.
 END_ERR
 
 asmpp_nok("", <<END_ASM, <<END_ERR);
 defl var
 END_ASM
 $test.asm:1: error: '=' expected
-z88dk-z80asm-pp found 1 error.
 END_ERR
 
 asmpp_nok("", <<END_ASM, <<END_ERR);
 defl var=
 END_ASM
 $test.asm:1: error: argument expected
-z88dk-z80asm-pp found 1 error.
 END_ERR
 
 asmpp_nok("", <<END_ASM, <<END_ERR);
 var defl
 END_ASM
 $test.asm:1: error: argument expected
-z88dk-z80asm-pp found 1 error.
 END_ERR
 
 asmpp_ok("", "", "", <<END_ASM, <<END_I);

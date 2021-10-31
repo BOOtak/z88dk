@@ -6,7 +6,6 @@ BEGIN { use lib 't'; require 'testlib.pl'; }
 unlink "$test.asm";
 capture_nok("./z88dk-z80asm-pp ${test}.asm", <<END_ERR);
 z88dk-z80asm-pp: error: file not found: $test.asm
-z88dk-z80asm-pp found 1 error.
 END_ERR
 
 # include syntax error
@@ -14,21 +13,18 @@ asmpp_nok("", <<END_ASM, <<END_ERR);
 include
 END_ASM
 $test.asm:1: error: string expected
-z88dk-z80asm-pp found 1 error.
 END_ERR
 
 asmpp_nok("", <<END_ASM, <<END_ERR);
 include 123
 END_ASM
 $test.asm:1: error: string expected
-z88dk-z80asm-pp found 1 error.
 END_ERR
 
 asmpp_nok("", <<END_ASM, <<END_ERR);
 include "$test.inc" extra
 END_ASM
 $test.asm:1: error: end of line expected
-z88dk-z80asm-pp found 1 error.
 END_ERR
 
 # include file not found
@@ -37,7 +33,6 @@ asmpp_nok("", <<END_ASM, <<END_ERR);
 include "$test.inc" ; comment
 END_ASM
 $test.asm:1: error: file not found: $test.inc
-z88dk-z80asm-pp found 1 error.
 END_ERR
 
 # recursive include
@@ -45,7 +40,6 @@ asmpp_nok("", <<END_ASM, <<END_ERR);
 include "$test.asm" ; comment
 END_ASM
 $test.asm:1: error: recursive include: $test.asm
-z88dk-z80asm-pp found 1 error.
 END_ERR
 
 # include
@@ -102,7 +96,6 @@ asmpp_nok("", <<END_ASM, <<END_ERR);
 	include "test.inc" ; comment
 END_ASM
 $test.asm:1: error: file not found: test.inc
-z88dk-z80asm-pp found 1 error.
 END_ERR
 
 asmpp_ok("-I$test.dir", "", "", <<END_ASM, <<END_I);

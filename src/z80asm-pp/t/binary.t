@@ -12,28 +12,24 @@ asmpp_nok("", <<END_ASM, <<END_ERR);
 binary
 END_ASM
 $test.asm:1: error: string expected
-z88dk-z80asm-pp found 1 error.
 END_ERR
 
 asmpp_nok("", <<END_ASM, <<END_ERR);
 incbin
 END_ASM
 $test.asm:1: error: string expected
-z88dk-z80asm-pp found 1 error.
 END_ERR
 
 asmpp_nok("", <<END_ASM, <<END_ERR);
 binary "hello",
 END_ASM
 $test.asm:1: error: end of line expected
-z88dk-z80asm-pp found 1 error.
 END_ERR
 
 asmpp_nok("", <<END_ASM, <<END_ERR);
 incbin "hello",
 END_ASM
 $test.asm:1: error: end of line expected
-z88dk-z80asm-pp found 1 error.
 END_ERR
 
 asmpp_ok("", "", "", <<END_ASM, <<END_I);
@@ -146,7 +142,6 @@ asmpp_nok("", <<END_ASM, <<END_ERR);
 binary "test.bin" ; comment
 END_ASM
 $test.asm:1: error: file not found: test.bin
-z88dk-z80asm-pp found 1 error.
 END_ERR
 
 asmpp_ok("-I$test.dir", "", "", <<END_ASM, <<END_I);

@@ -6,21 +6,18 @@ asmpp_nok("", <<END_ASM, <<END_ERR);
 macro
 END_ASM
 $test.asm:1: error: identifier expected
-z88dk-z80asm-pp found 1 error.
 END_ERR
 
 asmpp_nok("", <<END_ASM, <<END_ERR);
 macro m1 aa,
 END_ASM
 $test.asm:1: error: identifier expected
-z88dk-z80asm-pp found 1 error.
 END_ERR
 
 asmpp_nok("", <<END_ASM, <<END_ERR);
 macro m1 aa aa
 END_ASM
 $test.asm:1: error: end of line expected
-z88dk-z80asm-pp found 1 error.
 END_ERR
 
 asmpp_nok("", <<END_ASM, <<END_ERR);
@@ -28,7 +25,6 @@ macro m1
 macro m2
 END_ASM
 $test.asm:2: error: structure nesting
-z88dk-z80asm-pp found 1 error.
 END_ERR
 
 asmpp_nok("", <<END_ASM, <<END_ERR);
@@ -36,14 +32,12 @@ m1 macro
 m2 macro
 END_ASM
 $test.asm:2: error: structure nesting
-z88dk-z80asm-pp found 1 error.
 END_ERR
 
 asmpp_nok("", <<END_ASM, <<END_ERR);
 endm
 END_ASM
 $test.asm:1: error: structure nesting
-z88dk-z80asm-pp found 1 error.
 END_ERR
 
 asmpp_nok("", <<END_ASM, <<END_ERR);
@@ -52,7 +46,6 @@ endm
 m1 macro
 END_ASM
 $test.asm:3: error: duplicate definition: m1
-z88dk-z80asm-pp found 1 error.
 END_ERR
 
 asmpp_nok("", <<END_ASM, <<END_ERR);
@@ -61,7 +54,6 @@ l1: endm
 m2 macro
 END_ASM
 $test.asm:3: error: structure nesting
-z88dk-z80asm-pp found 1 error.
 END_ERR
 
 asmpp_nok("", <<END_ASM, <<END_ERR);
@@ -69,7 +61,6 @@ macro m1
 endm ,
 END_ASM
 $test.asm:2: error: end of line expected
-z88dk-z80asm-pp found 1 error.
 END_ERR
 
 asmpp_ok("", "", "", <<END_ASM, <<END_I);

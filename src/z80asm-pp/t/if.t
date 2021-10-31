@@ -6,35 +6,30 @@ asmpp_nok("", <<END_ASM, <<END_ERR);
 if
 END_ASM
 $test.asm:1: error: integer or symbol expected
-z88dk-z80asm-pp found 1 error.
 END_ERR
 
 asmpp_nok("", <<END_ASM, <<END_ERR);
 if 1,
 END_ASM
 $test.asm:1: error: end of line expected
-z88dk-z80asm-pp found 1 error.
 END_ERR
 
 asmpp_nok("", <<END_ASM, <<END_ERR);
 elif 1
 END_ASM
 $test.asm:1: error: structure nesting
-z88dk-z80asm-pp found 1 error.
 END_ERR
 
 asmpp_nok("", <<END_ASM, <<END_ERR);
 else
 END_ASM
 $test.asm:1: error: structure nesting
-z88dk-z80asm-pp found 1 error.
 END_ERR
 
 asmpp_nok("", <<END_ASM, <<END_ERR);
 endif
 END_ASM
 $test.asm:1: error: structure nesting
-z88dk-z80asm-pp found 1 error.
 END_ERR
 
 asmpp_nok("", <<END_ASM, <<END_ERR);
@@ -44,7 +39,6 @@ else
 endif
 END_ASM
 $test.asm:3: error: structure nesting
-z88dk-z80asm-pp found 1 error.
 END_ERR
 
 asmpp_nok("", <<END_ASM, <<END_ERR);
@@ -55,35 +49,30 @@ END_ASM
 $test.asm:2: error: end of line expected
 $test.asm:3: error: end of line expected
 $test.asm:4: error: structure nesting
-z88dk-z80asm-pp found 3 errors.
 END_ERR
 
 asmpp_nok("", <<END_ASM, <<END_ERR);
 if 1
 END_ASM
 $test.asm:2: error: structure nesting
-z88dk-z80asm-pp found 1 error.
 END_ERR
 
 asmpp_nok("", <<END_ASM, <<END_ERR);
 ifdef name
 END_ASM
 $test.asm:2: error: structure nesting
-z88dk-z80asm-pp found 1 error.
 END_ERR
 
 asmpp_nok("", <<END_ASM, <<END_ERR);
 ifndef name
 END_ASM
 $test.asm:2: error: structure nesting
-z88dk-z80asm-pp found 1 error.
 END_ERR
 
 asmpp_nok("", <<END_ASM, <<END_ERR);
 ifdef AA,
 END_ASM
 $test.asm:1: error: end of line expected
-z88dk-z80asm-pp found 1 error.
 END_ERR
 
 asmpp_nok("", <<END_ASM, <<END_ERR);
@@ -92,7 +81,6 @@ elifdef AA,
 endif
 END_ASM
 $test.asm:2: error: end of line expected
-z88dk-z80asm-pp found 1 error.
 END_ERR
 
 asmpp_nok("", <<END_ASM, <<END_ERR);
@@ -101,7 +89,6 @@ elifndef AA,
 endif
 END_ASM
 $test.asm:2: error: end of line expected
-z88dk-z80asm-pp found 1 error.
 END_ERR
 
 asmpp_ok("", "", "", <<END_ASM, <<END_I);

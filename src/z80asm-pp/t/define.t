@@ -6,7 +6,6 @@ asmpp_nok("", <<END_ASM, <<END_ERR);
 #define
 END_ASM
 $test.asm:1: error: identifier expected
-z88dk-z80asm-pp found 1 error.
 END_ERR
 
 asmpp_nok("", <<END_ASM, <<END_ERR);
@@ -14,21 +13,18 @@ asmpp_nok("", <<END_ASM, <<END_ERR);
 #define abc
 END_ASM
 $test.asm:2: error: duplicate definition: abc
-z88dk-z80asm-pp found 1 error.
 END_ERR
 
 asmpp_nok("", <<END_ASM, <<END_ERR);
 #define abc(a,b,a) a+b+a
 END_ASM
 $test.asm:1: error: duplicate definition: a
-z88dk-z80asm-pp found 1 error.
 END_ERR
 
 asmpp_nok("", <<END_ASM, <<END_ERR);
 #define abc(a,b a+b
 END_ASM
 $test.asm:1: error: ')' or ',' expected
-z88dk-z80asm-pp found 1 error.
 END_ERR
 
 asmpp_ok("", "", "", <<END_ASM, <<END_I);

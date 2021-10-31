@@ -6,6 +6,7 @@
 
 #include "error.h"
 #include "common.h"
+#include "option.h"
 #include <iostream>
 using namespace std;
 
@@ -45,11 +46,13 @@ void Error::report_exit() {
     if (m_count == 0)
         exit(EXIT_SUCCESS);
     else {
-        cerr << PROG << " found " << m_count << " error";
-        if (m_count != 1)
-            cerr << "s";
-        cerr << "." << endl;
-        exit(EXIT_FAILURE);
+		if (g_options.verbose) {
+			cerr << PROG << " found " << m_count << " error";
+			if (m_count != 1)
+				cerr << "s";
+			cerr << "." << endl;
+		}
+		exit(EXIT_FAILURE);
     }
 }
 

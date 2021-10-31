@@ -6,7 +6,6 @@ asmpp_nok("", <<END_ASM, <<END_ERR);
 #defcont
 END_ASM
 $test.asm:1: error: structure nesting
-z88dk-z80asm-pp found 1 error.
 END_ERR
 
 asmpp_ok("", "", "", <<END_ASM, <<END_I);

@@ -4,7 +4,6 @@ BEGIN { use lib 't'; require 'testlib.pl'; }
 
 capture_nok("./z88dk-z80asm-pp -D", <<END);
 z88dk-z80asm-pp: error: invalid option: -D
-z88dk-z80asm-pp found 1 error.
 END
 
 asmpp_ok("-Dstart", "", "", <<END_ASM, <<END_I);

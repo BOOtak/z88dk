@@ -83,7 +83,6 @@ asmpp_nok("", <<'END_IN', <<END_ERR);
 	ld a, ''
 END_IN
 $test.asm:1: error: invalid single quoted character
-z88dk-z80asm-pp found 1 error.
 END_ERR
 
 asmpp_nok("", <<'END_IN', <<END_ERR);
@@ -94,7 +93,6 @@ END_IN
 $test.asm:1: error: invalid single quoted character
 $test.asm:2: error: invalid single quoted character
 $test.asm:3: error: invalid character
-z88dk-z80asm-pp found 3 errors.
 END_ERR
 
 # symbols
