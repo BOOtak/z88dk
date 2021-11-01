@@ -27,30 +27,6 @@ $test.asm:1: error: constant expression expected
 END_ERR
 
 asmpp_ok("", "", "", <<END_ASM, <<END_I);
-l1 defgroup { a1,a2=2,a3 }
-if a1
-not in
-endif
-if a2
-in
-endif
-END_ASM
-line 1,"$test.asm"
-l1:
-line 1
-defc a1=0
-line 1
-defc a2=2
-line 1
-defc a3=3
-
-
-
-
-in
-END_I
-
-asmpp_ok("", "", "", <<END_ASM, <<END_I);
 l1: defgroup { 
 a2=2 
 }

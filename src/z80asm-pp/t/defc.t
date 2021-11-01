@@ -43,7 +43,6 @@ asmpp_ok("", "", "", <<END_ASM, <<END_I);
     defc c1=1
 .l1 defc c2=2
 l2: defc c3=3
-l3  defc c4=4
 END_ASM
 line 1,"$test.asm"
 defc c1=1
@@ -53,26 +52,15 @@ defc c2=2
 l2:
 line 3
 defc c3=3
-l3:
-line 4
-defc c4=4
 END_I
 
 asmpp_ok("", "", "", <<END_ASM, <<END_I);
 c1  equ 1
-.c2 equ 2
-c3: equ 3
-c4  = 4
-.c5 = 5
-c6: = 6
+c2  =   2
 END_ASM
 line 1,"$test.asm"
 defc c1=1
 defc c2=2
-defc c3=3
-defc c4=4
-defc c5=5
-defc c6=6
 END_I
 
 asmpp_ok("", "", "", <<END_ASM, <<END_I);

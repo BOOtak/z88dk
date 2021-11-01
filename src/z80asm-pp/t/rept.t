@@ -53,21 +53,6 @@ nop
 END_I
 
 asmpp_ok("", "", "", <<END_ASM, <<END_I);
-l1 rept 3
-nop
-endr
-END_ASM
-line 1,"$test.asm"
-l1:
-
-nop
-line 3
-nop
-line 3
-nop
-END_I
-
-asmpp_ok("", "", "", <<END_ASM, <<END_I);
 l1: rept 3
 nop
 endr

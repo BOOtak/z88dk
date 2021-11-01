@@ -246,21 +246,6 @@ line 2,"$test.asm"
 END_I
 
 asmpp_ok("", "", "", <<END_ASM, <<END_I);
-l1 if 1
-1
-l2 elif 2
-2
-l3 else
-3
-l4 endif
-END_ASM
-line 1,"$test.asm"
-l1:
-1
-l2:
-END_I
-
-asmpp_ok("", "", "", <<END_ASM, <<END_I);
 .l1 if 1
 1
 .l2 elif 2
@@ -291,21 +276,6 @@ l2:
 END_I
 
 asmpp_ok("-DAA", "", "", <<END_ASM, <<END_I);
-l1 ifdef AA
-1
-l2 elifdef BB
-2
-l3 else
-3
-l4 endif
-END_ASM
-line 1,"$test.asm"
-l1:
-1
-l2:
-END_I
-
-asmpp_ok("-DAA", "", "", <<END_ASM, <<END_I);
 .l1 ifdef AA
 1
 .l2 elifdef BB
@@ -328,21 +298,6 @@ l2: elifdef BB
 l3: else
 3
 l4: endif
-END_ASM
-line 1,"$test.asm"
-l1:
-1
-l2:
-END_I
-
-asmpp_ok("", "", "", <<END_ASM, <<END_I);
-l1 ifndef AA
-1
-l2 elifndef BB
-2
-l3 else
-3
-l4 endif
 END_ASM
 line 1,"$test.asm"
 l1:
@@ -383,5 +338,3 @@ END_I
 
 unlink_testfiles;
 done_testing;
-
-__END__

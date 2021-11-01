@@ -41,15 +41,6 @@ abc__1:ret
 END_I
 
 asmpp_ok("", "", "", <<END_ASM, <<END_I);
-l1 local abc
-abc: ret
-END_ASM
-line 1,"$test.asm"
-l1:
-abc__1:ret
-END_I
-
-asmpp_ok("", "", "", <<END_ASM, <<END_I);
 macro m1
 local abc
 abc:ret

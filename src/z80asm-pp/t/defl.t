@@ -29,9 +29,9 @@ END_ERR
 asmpp_ok("", "", "", <<END_ASM, <<END_I);
 var defl var+1
 defb var
-.var defl var+2
+var defl var+2
 defb var
-var: defl var+3
+var defl var+3
 defb var
 defl var=var+4
 defb var

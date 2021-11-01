@@ -38,18 +38,6 @@ defc a2=1
 END_I
 
 asmpp_ok("", "", "", <<END_ASM, <<END_I);
-l1 defvars 0 {
-a1 ds.b 1
-a2 ds.b 1
-}
-END_ASM
-line 1,"$test.asm"
-l1:
-defc a1=0
-defc a2=1
-END_I
-
-asmpp_ok("", "", "", <<END_ASM, <<END_I);
 .l1 defvars 0 {
 a1 ds.b 1
 a2 ds.b 1

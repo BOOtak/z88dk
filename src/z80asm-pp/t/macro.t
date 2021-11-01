@@ -98,40 +98,6 @@ inc c
 END_I
 
 asmpp_ok("", "", "", <<END_ASM, <<END_I);
-.m1 macro
-inc b
-inc c
-endm
-m1 \\ m1
-END_ASM
-line 5,"$test.asm"
-inc b
-line 5
-inc c
-line 5
-inc b
-line 5
-inc c
-END_I
-
-asmpp_ok("", "", "", <<END_ASM, <<END_I);
-m1: macro
-inc b
-inc c
-endm
-m1 \\ m1
-END_ASM
-line 5,"$test.asm"
-inc b
-line 5
-inc c
-line 5
-inc b
-line 5
-inc c
-END_I
-
-asmpp_ok("", "", "", <<END_ASM, <<END_I);
 macro m1
 inc b
 inc c
@@ -170,25 +136,6 @@ inc c
 END_I
 
 asmpp_ok("", "", "", <<END_ASM, <<END_I);
-macro m1
-inc b
-inc c
-endm
-l1 m1 \\ m1
-END_ASM
-line 5,"$test.asm"
-l1:
-line 5
-inc b
-line 5
-inc c
-line 5
-inc b
-line 5
-inc c
-END_I
-
-asmpp_ok("", "", "", <<END_ASM, <<END_I);
 macro m1 a1,a2
 ld a1,a2
 endm
@@ -204,8 +151,8 @@ asmpp_ok("", "", "", <<END_ASM, <<END_I);
 macro m1 a1,a2
 ld a1,a2
 endm
-l1 m1 b,d
-l2 m1 c,e
+l1: m1 b,d
+.l2 m1 c,e
 END_ASM
 line 4,"$test.asm"
 l1:

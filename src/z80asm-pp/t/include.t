@@ -52,7 +52,6 @@ asmpp_ok("", "", "", <<END_ASM, <<END_I);
 	inc a
 .l1	include "$test.inc"
 l2:	include "$test.inc"
-l3	include "$test.inc"
 #include "$test.inc"
 	dec a \\ include "$test.inc" \\ inc a \\ include \\
 "$test.inc" ; comment
@@ -70,17 +69,13 @@ line 5,"$test.asm"
 l2:
 line 1,"$test.inc"
 ld a,1
-line 6,"$test.asm"
-l3:
-line 1,"$test.inc"
-ld a,1
 line 1
 ld a,1
-line 8,"$test.asm"
+line 7,"$test.asm"
 dec a
 line 1,"$test.inc"
 ld a,1
-line 8,"$test.asm"
+line 7,"$test.asm"
 inc a
 line 1,"$test.inc"
 ld a,1

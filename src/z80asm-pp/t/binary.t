@@ -82,24 +82,6 @@ defb 1,2,3
 END_I
 
 asmpp_ok("", "", "", <<END_ASM, <<END_I);
-l1 binary "$test.bin"
-END_ASM
-line 1,"$test.asm"
-l1:
-line 1
-defb 1,2,3
-END_I
-
-asmpp_ok("", "", "", <<END_ASM, <<END_I);
-l1 incbin "$test.bin"
-END_ASM
-line 1,"$test.asm"
-l1:
-line 1
-defb 1,2,3
-END_I
-
-asmpp_ok("", "", "", <<END_ASM, <<END_I);
 .l1 binary "$test.bin"
 END_ASM
 line 1,"$test.asm"
