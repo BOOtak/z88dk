@@ -38,6 +38,7 @@ extern int         get_error_line(void);
 *----------------------------------------------------------------------------*/
 extern void reset_error_count( void );
 extern int  get_num_errors( void );
+extern void inc_error_count(void);
 
 /*-----------------------------------------------------------------------------
 *	Open file to receive all errors / warnings from now on

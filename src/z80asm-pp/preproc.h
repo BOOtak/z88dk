@@ -174,6 +174,7 @@ private:
 	void do_rept();
 	void do_reptc();
 	void do_repti();
+	TType do_def_common();
 	void do_defgroup();
 	void do_defvars();
 	void do_binary();

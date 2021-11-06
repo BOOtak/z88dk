@@ -38,6 +38,22 @@
 #define CPU_NOT_Z80	(CPU_ALL & ~(CPU_Z80 | CPU_Z80N))
 
 /*-----------------------------------------------------------------------------
+*   default file name extensions 
+*----------------------------------------------------------------------------*/
+
+#define FILEEXT_ASM     ".asm"    
+#define FILEEXT_I	    ".i"    
+#define FILEEXT_LIST    ".lis"    
+#define FILEEXT_OBJ     ".o"	  
+#define FILEEXT_DEF     ".def"    
+#define FILEEXT_ERR     ".err"    
+#define FILEEXT_BIN     ".bin"    
+#define FILEEXT_LIB     ".lib"    
+#define FILEEXT_SYM     ".sym"    
+#define FILEEXT_MAP     ".map"    
+#define FILEEXT_RELOC   ".reloc"  
+
+/*-----------------------------------------------------------------------------
 *   Assembler standard library
 *----------------------------------------------------------------------------*/
 #define Z80ASM_LIB	"z88dk-z80asm-%s-%s.lib"
@@ -67,11 +83,17 @@ extern Opts opts;
 extern void parse_argv( int argc, char *argv[] );
 
 /*-----------------------------------------------------------------------------
+*   z80asm_pp command line
+*----------------------------------------------------------------------------*/
+extern const char* z80asm_pp_cmd(void);
+
+/*-----------------------------------------------------------------------------
 *   Change extension of given file name, return pointer to file name in
 *	strpool
 *	Extensions may be changed by options.
 *----------------------------------------------------------------------------*/
-extern const char *get_asm_filename(const char *filename );
+extern const char *get_asm_filename(const char *filename);
+extern const char *get_i_filename(const char *filename);
 extern const char *get_list_filename(const char *filename );
 extern const char *get_obj_filename(const char *filename );
 extern const char *get_def_filename(const char *filename );

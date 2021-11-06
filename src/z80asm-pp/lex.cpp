@@ -74,21 +74,21 @@ void Lexer::set(const string& text) {
 			case '\n':	goto yy9;
 			case '!':	goto yy11;
 			case '"':	goto yy13;
-			case '#':	goto yy14;
-			case '$':	goto yy16;
-			case '%':	goto yy18;
-			case '&':	goto yy20;
-			case '\'':	goto yy22;
-			case '(':	goto yy23;
-			case ')':	goto yy25;
-			case '*':	goto yy27;
-			case '+':	goto yy29;
-			case ',':	goto yy31;
-			case '-':	goto yy33;
-			case '.':	goto yy35;
-			case '/':	goto yy37;
-			case '0':	goto yy39;
-			case '1':	goto yy41;
+			case '#':	goto yy15;
+			case '$':	goto yy17;
+			case '%':	goto yy19;
+			case '&':	goto yy21;
+			case '\'':	goto yy23;
+			case '(':	goto yy24;
+			case ')':	goto yy26;
+			case '*':	goto yy28;
+			case '+':	goto yy30;
+			case ',':	goto yy32;
+			case '-':	goto yy34;
+			case '.':	goto yy36;
+			case '/':	goto yy38;
+			case '0':	goto yy40;
+			case '1':	goto yy42;
 			case '2':
 			case '3':
 			case '4':
@@ -96,33 +96,36 @@ void Lexer::set(const string& text) {
 			case '6':
 			case '7':
 			case '8':
-			case '9':	goto yy43;
-			case ':':	goto yy45;
-			case ';':	goto yy47;
-			case '<':	goto yy49;
-			case '=':	goto yy51;
-			case '>':	goto yy53;
-			case '?':	goto yy55;
-			case '@':	goto yy57;
+			case '9':	goto yy44;
+			case ':':	goto yy46;
+			case ';':	goto yy48;
+			case '<':	goto yy50;
+			case '=':	goto yy52;
+			case '>':	goto yy54;
+			case '?':	goto yy56;
+			case '@':	goto yy58;
 			case 'A':
-			case 'a':	goto yy58;
+			case 'a':	goto yy59;
 			case 'B':
+			case 'b':	goto yy61;
 			case 'C':
+			case 'c':	goto yy62;
+			case 'D':
+			case 'd':	goto yy63;
 			case 'E':
+			case 'L':
+			case 'e':
+			case 'l':	goto yy64;
 			case 'F':
 			case 'G':
-			case 'H':
 			case 'I':
 			case 'J':
 			case 'K':
-			case 'L':
 			case 'M':
 			case 'N':
 			case 'O':
 			case 'P':
 			case 'Q':
-			case 'R':
-			case 'S':
 			case 'T':
 			case 'U':
 			case 'V':
@@ -131,40 +134,37 @@ void Lexer::set(const string& text) {
 			case 'Y':
 			case 'Z':
 			case '_':
-			case 'b':
-			case 'c':
-			case 'e':
 			case 'f':
 			case 'g':
-			case 'h':
 			case 'i':
 			case 'j':
 			case 'k':
-			case 'l':
 			case 'm':
 			case 'n':
 			case 'o':
 			case 'p':
 			case 'q':
-			case 'r':
-			case 's':
 			case 't':
 			case 'u':
 			case 'v':
 			case 'w':
 			case 'x':
 			case 'y':
-			case 'z':	goto yy60;
-			case 'D':
-			case 'd':	goto yy62;
-			case '[':	goto yy63;
-			case '\\':	goto yy65;
-			case ']':	goto yy67;
-			case '^':	goto yy69;
-			case '{':	goto yy71;
-			case '|':	goto yy73;
-			case '}':	goto yy75;
-			case '~':	goto yy77;
+			case 'z':	goto yy65;
+			case 'H':
+			case 'h':	goto yy67;
+			case 'R':
+			case 'r':	goto yy68;
+			case 'S':
+			case 's':	goto yy69;
+			case '[':	goto yy70;
+			case '\\':	goto yy72;
+			case ']':	goto yy74;
+			case '^':	goto yy76;
+			case '{':	goto yy78;
+			case '|':	goto yy80;
+			case '}':	goto yy82;
+			case '~':	goto yy84;
 			default:	goto yy4;
 			}
 yy2:
@@ -194,7 +194,7 @@ yy9:
 yy11:
 			yych = *++p;
 			switch (yych) {
-			case '=':	goto yy79;
+			case '=':	goto yy86;
 			default:	goto yy12;
 			}
 yy12:
@@ -207,28 +207,30 @@ yy13:
 			switch (yych) {
 			case 0x00:
 			case '\n':
-			case '\r':	goto yy5;
+			case '\r':	goto yy14;
 			case '"':
 				yyt1 = p;
-				goto yy84;
+				goto yy91;
 			case '\\':
 				yyt1 = p;
-				goto yy86;
+				goto yy93;
 			default:
 				yyt1 = p;
-				goto yy81;
+				goto yy88;
 			}
 yy14:
+			{ throw Error(ECode::UnbalancedQuote); }
+yy15:
 			yych = *++p;
 			switch (yych) {
-			case '#':	goto yy88;
-			default:	goto yy15;
+			case '#':	goto yy95;
+			default:	goto yy16;
 			}
-yy15:
+yy16:
 			{ m_tokens.emplace_back(TType::Hash);
         					  m_tokens.back().col = col;
         					  continue; }
-yy16:
+yy17:
 			yych = *++p;
 			switch (yych) {
 			case '0':
@@ -252,74 +254,74 @@ yy16:
 			case 'c':
 			case 'd':
 			case 'e':
-			case 'f':	goto yy90;
-			default:	goto yy17;
+			case 'f':	goto yy97;
+			default:	goto yy18;
 			}
-yy17:
+yy18:
 			{ m_tokens.emplace_back(TType::ASMPC);
         					  m_tokens.back().col = col;
         					  continue; }
-yy18:
+yy19:
 			yyaccept = 1;
 			yych = *(YYMARKER = ++p);
 			switch (yych) {
-			case '"':	goto yy93;
+			case '"':	goto yy100;
 			case '0':
-			case '1':	goto yy95;
-			default:	goto yy19;
+			case '1':	goto yy102;
+			default:	goto yy20;
 			}
-yy19:
+yy20:
 			{ m_tokens.emplace_back(TType::Mod);
         					  m_tokens.back().col = col;
         					  continue; }
-yy20:
+yy21:
 			yych = *++p;
 			switch (yych) {
-			case '&':	goto yy98;
-			default:	goto yy21;
+			case '&':	goto yy105;
+			default:	goto yy22;
 			}
-yy21:
+yy22:
 			{ m_tokens.emplace_back(TType::BinAnd);
         					  m_tokens.back().col = col;
         					  continue; }
-yy22:
+yy23:
 			yyaccept = 0;
 			yych = *(YYMARKER = ++p);
 			switch (yych) {
 			case 0x00:
 			case '\n':
-			case '\r':	goto yy5;
+			case '\r':	goto yy14;
 			case '\'':
 				yyt1 = p;
-				goto yy102;
+				goto yy109;
 			case '\\':
 				yyt1 = p;
-				goto yy104;
+				goto yy111;
 			default:
 				yyt1 = p;
-				goto yy100;
+				goto yy107;
 			}
-yy23:
+yy24:
 			++p;
 			{ m_tokens.emplace_back(TType::Lparen);
         					  m_tokens.back().col = col;
         					  continue; }
-yy25:
+yy26:
 			++p;
 			{ m_tokens.emplace_back(TType::Rparen);
         					  m_tokens.back().col = col;
         					  continue; }
-yy27:
+yy28:
 			yych = *++p;
 			switch (yych) {
-			case '*':	goto yy106;
-			default:	goto yy28;
+			case '*':	goto yy113;
+			default:	goto yy29;
 			}
-yy28:
+yy29:
 			{ m_tokens.emplace_back(TType::Mul);
         					  m_tokens.back().col = col;
         					  continue; }
-yy29:
+yy30:
 			yyaccept = 2;
 			yych = *(YYMARKER = ++p);
 			switch (yych) {
@@ -332,19 +334,19 @@ yy29:
 			case '6':
 			case '7':
 			case '8':
-			case '9':	goto yy108;
-			default:	goto yy30;
+			case '9':	goto yy115;
+			default:	goto yy31;
 			}
-yy30:
+yy31:
 			{ m_tokens.emplace_back(TType::Plus);
         					  m_tokens.back().col = col;
         					  continue; }
-yy31:
+yy32:
 			++p;
 			{ m_tokens.emplace_back(TType::Comma);
         					  m_tokens.back().col = col;
         					  continue; }
-yy33:
+yy34:
 			yyaccept = 3;
 			yych = *(YYMARKER = ++p);
 			switch (yych) {
@@ -357,14 +359,14 @@ yy33:
 			case '6':
 			case '7':
 			case '8':
-			case '9':	goto yy108;
-			default:	goto yy34;
+			case '9':	goto yy115;
+			default:	goto yy35;
 			}
-yy34:
+yy35:
 			{ m_tokens.emplace_back(TType::Minus);
         					  m_tokens.back().col = col;
         					  continue; }
-yy35:
+yy36:
 			yyaccept = 4;
 			yych = *(YYMARKER = ++p);
 			switch (yych) {
@@ -372,7 +374,7 @@ yy35:
 			case '\v':
 			case '\f':
 			case '\r':
-			case ' ':	goto yy110;
+			case ' ':	goto yy117;
 			case '0':
 			case '1':
 			case '2':
@@ -382,7 +384,7 @@ yy35:
 			case '6':
 			case '7':
 			case '8':
-			case '9':	goto yy112;
+			case '9':	goto yy119;
 			case 'A':
 			case 'B':
 			case 'C':
@@ -437,40 +439,40 @@ yy35:
 			case 'y':
 			case 'z':
 				yyt1 = p;
-				goto yy115;
-			default:	goto yy36;
+				goto yy122;
+			default:	goto yy37;
 			}
-yy36:
+yy37:
 			{ m_tokens.emplace_back(TType::Dot);
         					  m_tokens.back().col = col;
         					  continue; }
-yy37:
+yy38:
 			++p;
 			{ m_tokens.emplace_back(TType::Div);
         					  m_tokens.back().col = col;
         					  continue; }
-yy39:
+yy40:
 			yyaccept = 5;
 			yych = *(YYMARKER = ++p);
 			switch (yych) {
 			case 'B':
-			case 'b':	goto yy120;
+			case 'b':	goto yy127;
 			case 'X':
-			case 'x':	goto yy125;
-			default:	goto yy42;
+			case 'x':	goto yy132;
+			default:	goto yy43;
 			}
-yy40:
+yy41:
 			{ m_tokens.emplace_back(TType::Integer, a2i(p0, 10));
         					  m_tokens.back().col = col;
         					  continue; }
-yy41:
+yy42:
 			yyaccept = 5;
 			yych = *(YYMARKER = ++p);
-yy42:
+yy43:
 			switch (yych) {
-			case '.':	goto yy112;
+			case '.':	goto yy119;
 			case '0':
-			case '1':	goto yy41;
+			case '1':	goto yy42;
 			case '2':
 			case '3':
 			case '4':
@@ -478,7 +480,7 @@ yy42:
 			case '6':
 			case '7':
 			case '8':
-			case '9':	goto yy43;
+			case '9':	goto yy44;
 			case 'A':
 			case 'C':
 			case 'E':
@@ -486,20 +488,20 @@ yy42:
 			case 'a':
 			case 'c':
 			case 'e':
-			case 'f':	goto yy118;
+			case 'f':	goto yy125;
 			case 'B':
-			case 'b':	goto yy126;
+			case 'b':	goto yy133;
 			case 'D':
-			case 'd':	goto yy122;
+			case 'd':	goto yy129;
 			case 'H':
-			case 'h':	goto yy123;
-			default:	goto yy40;
+			case 'h':	goto yy130;
+			default:	goto yy41;
 			}
-yy43:
+yy44:
 			yyaccept = 5;
 			yych = *(YYMARKER = ++p);
 			switch (yych) {
-			case '.':	goto yy112;
+			case '.':	goto yy119;
 			case '0':
 			case '1':
 			case '2':
@@ -509,7 +511,7 @@ yy43:
 			case '6':
 			case '7':
 			case '8':
-			case '9':	goto yy43;
+			case '9':	goto yy44;
 			case 'A':
 			case 'B':
 			case 'C':
@@ -519,87 +521,124 @@ yy43:
 			case 'b':
 			case 'c':
 			case 'e':
-			case 'f':	goto yy118;
+			case 'f':	goto yy125;
 			case 'D':
-			case 'd':	goto yy122;
+			case 'd':	goto yy129;
 			case 'H':
-			case 'h':	goto yy123;
-			default:	goto yy40;
+			case 'h':	goto yy130;
+			default:	goto yy41;
 			}
-yy45:
+yy46:
 			++p;
 			{ m_tokens.emplace_back(TType::Colon);
         					  m_tokens.back().col = col;
         					  continue; }
-yy47:
+yy48:
 			++p;
 			{ return; }
-yy49:
+yy50:
 			yych = *++p;
 			switch (yych) {
-			case '<':	goto yy127;
-			case '=':	goto yy129;
-			case '>':	goto yy79;
-			default:	goto yy50;
+			case '<':	goto yy134;
+			case '=':	goto yy136;
+			case '>':	goto yy86;
+			default:	goto yy51;
 			}
-yy50:
+yy51:
 			{ m_tokens.emplace_back(TType::Lt);
         					  m_tokens.back().col = col;
         					  continue; }
-yy51:
+yy52:
 			yych = *++p;
 			switch (yych) {
-			case '=':	goto yy131;
-			default:	goto yy52;
+			case '=':	goto yy138;
+			default:	goto yy53;
 			}
-yy52:
+yy53:
 			{ m_tokens.emplace_back(TType::Eq);
         					  m_tokens.back().col = col;
         					  continue; }
-yy53:
+yy54:
 			yych = *++p;
 			switch (yych) {
-			case '=':	goto yy132;
-			case '>':	goto yy134;
-			default:	goto yy54;
+			case '=':	goto yy139;
+			case '>':	goto yy141;
+			default:	goto yy55;
 			}
-yy54:
+yy55:
 			{ m_tokens.emplace_back(TType::Gt);
         					  m_tokens.back().col = col;
         					  continue; }
-yy55:
+yy56:
 			++p;
 			{ m_tokens.emplace_back(TType::Quest);
         					  m_tokens.back().col = col;
         					  continue; }
-yy57:
-			yyaccept = 0;
-			yych = *(YYMARKER = ++p);
-			switch (yych) {
-			case '"':	goto yy93;
-			case '0':
-			case '1':	goto yy95;
-			default:	goto yy5;
-			}
 yy58:
 			yyaccept = 6;
 			yych = *(YYMARKER = ++p);
 			switch (yych) {
-			case 'F':
-			case 'f':	goto yy140;
-			default:	goto yy61;
+			case '"':	goto yy100;
+			case '0':
+			case '1':	goto yy102;
+			default:	goto yy5;
 			}
 yy59:
+			yyaccept = 7;
+			yych = *(YYMARKER = ++p);
+			switch (yych) {
+			case '\'':	goto yy145;
+			case 'F':
+			case 'f':	goto yy64;
+			default:	goto yy66;
+			}
+yy60:
 			p1 = p;
 			{ string str = ident_change_case(string(p0, p1));
         					  Keyword keyword = lu_keyword(str);
         					  m_tokens.emplace_back(TType::Ident, str, keyword);
         					  m_tokens.back().col = col;
         					  continue; }
-yy60:
-			yyaccept = 6;
-			yych = *(YYMARKER = ++p);
 yy61:
+			yyaccept = 7;
+			yych = *(YYMARKER = ++p);
+			switch (yych) {
+			case '\'':	goto yy145;
+			case 'C':
+			case 'c':	goto yy64;
+			default:	goto yy66;
+			}
+yy62:
+			yyaccept = 7;
+			yych = *(YYMARKER = ++p);
+			switch (yych) {
+			case '\'':	goto yy145;
+			case 'C':
+			case 'c':	goto yy148;
+			default:	goto yy66;
+			}
+yy63:
+			yyaccept = 7;
+			yych = *(YYMARKER = ++p);
+			switch (yych) {
+			case '\'':	goto yy145;
+			case 'E':
+			case 'e':	goto yy64;
+			case 'S':
+			case 's':	goto yy149;
+			default:	goto yy66;
+			}
+yy64:
+			yyaccept = 7;
+			yych = *(YYMARKER = ++p);
+			switch (yych) {
+			case '\'':	goto yy145;
+			default:	goto yy66;
+			}
+yy65:
+			yyaccept = 7;
+			yych = *(YYMARKER = ++p);
+yy66:
 			switch (yych) {
 			case '\t':
 			case '\v':
@@ -607,7 +646,7 @@ yy61:
 			case '\r':
 			case ' ':
 				yyt1 = p;
-				goto yy136;
+				goto yy143;
 			case '0':
 			case '1':
 			case '2':
@@ -670,104 +709,124 @@ yy61:
 			case 'w':
 			case 'x':
 			case 'y':
-			case 'z':	goto yy60;
+			case 'z':	goto yy65;
 			case ':':
 				yyt1 = p;
-				goto yy138;
-			default:	goto yy59;
+				goto yy146;
+			default:	goto yy60;
 			}
-yy62:
-			yyaccept = 6;
+yy67:
+			yyaccept = 7;
 			yych = *(YYMARKER = ++p);
 			switch (yych) {
-			case 'S':
-			case 's':	goto yy141;
-			default:	goto yy61;
+			case '\'':	goto yy145;
+			case 'L':
+			case 'l':	goto yy64;
+			default:	goto yy66;
 			}
-yy63:
+yy68:
+			yyaccept = 7;
+			yych = *(YYMARKER = ++p);
+			switch (yych) {
+			case 'L':
+			case 'R':
+			case 'l':
+			case 'r':	goto yy150;
+			default:	goto yy66;
+			}
+yy69:
+			yyaccept = 7;
+			yych = *(YYMARKER = ++p);
+			switch (yych) {
+			case 'C':
+			case 'c':	goto yy148;
+			default:	goto yy66;
+			}
+yy70:
 			++p;
 			{ m_tokens.emplace_back(TType::Lsquare);
         					  m_tokens.back().col = col;
         					  continue; }
-yy65:
+yy72:
 			++p;
 			{ m_tokens.emplace_back(TType::Backslash);
         					  m_tokens.back().col = col;
         					  continue; }
-yy67:
+yy74:
 			++p;
 			{ m_tokens.emplace_back(TType::Rsquare);
         					  m_tokens.back().col = col;
         					  continue; }
-yy69:
+yy76:
 			yych = *++p;
 			switch (yych) {
-			case '^':	goto yy142;
-			default:	goto yy70;
+			case '^':	goto yy151;
+			default:	goto yy77;
 			}
-yy70:
+yy77:
 			{ m_tokens.emplace_back(TType::BinXor);
         					  m_tokens.back().col = col;
         					  continue; }
-yy71:
+yy78:
 			++p;
 			{ m_tokens.emplace_back(TType::Lbrace);
         					  m_tokens.back().col = col;
         					  continue; }
-yy73:
+yy80:
 			yych = *++p;
 			switch (yych) {
-			case '|':	goto yy144;
-			default:	goto yy74;
+			case '|':	goto yy153;
+			default:	goto yy81;
 			}
-yy74:
+yy81:
 			{ m_tokens.emplace_back(TType::BinOr);
         					  m_tokens.back().col = col;
         					  continue; }
-yy75:
+yy82:
 			++p;
 			{ m_tokens.emplace_back(TType::Rbrace);
         					  m_tokens.back().col = col;
         					  continue; }
-yy77:
+yy84:
 			++p;
 			{ m_tokens.emplace_back(TType::BinNot);
         					  m_tokens.back().col = col;
         					  continue; }
-yy79:
+yy86:
 			++p;
 			{ m_tokens.emplace_back(TType::Ne);
         					  m_tokens.back().col = col;
         					  continue; }
-yy81:
+yy88:
 			yych = *++p;
 			switch (yych) {
 			case 0x00:
 			case '\n':
-			case '\r':	goto yy83;
-			case '"':	goto yy84;
-			case '\\':	goto yy86;
-			default:	goto yy81;
+			case '\r':	goto yy90;
+			case '"':	goto yy91;
+			case '\\':	goto yy93;
+			default:	goto yy88;
 			}
-yy83:
+yy90:
 			p = YYMARKER;
 			switch (yyaccept) {
-			case 0: 	goto yy5;
-			case 1: 	goto yy19;
-			case 2: 	goto yy30;
-			case 3: 	goto yy34;
-			case 4: 	goto yy36;
-			case 5: 	goto yy40;
-			case 6: 	goto yy59;
-			case 7: 	goto yy114;
+			case 0: 	goto yy14;
+			case 1: 	goto yy20;
+			case 2: 	goto yy31;
+			case 3: 	goto yy35;
+			case 4: 	goto yy37;
+			case 5: 	goto yy41;
+			case 6: 	goto yy5;
+			case 7: 	goto yy60;
 			case 8: 	goto yy121;
-			case 9: 	goto yy85;
-			case 10: 	goto yy103;
-			default:	goto yy153;
+			case 9: 	goto yy128;
+			case 10: 	goto yy92;
+			case 11: 	goto yy110;
+			default:	goto yy162;
 			}
-yy84:
+yy91:
 			++p;
-yy85:
+yy92:
 			p1 = yyt1;
 			p2 = p - 1;
 			{
@@ -775,22 +834,22 @@ yy85:
         					  m_tokens.emplace_back(TType::String, str);
         					  m_tokens.back().col = col;
         					  continue; }
-yy86:
+yy93:
 			yych = *++p;
 			switch (yych) {
 			case 0x00:
 			case '\n':
-			case '\r':	goto yy83;
-			case '"':	goto yy146;
-			case '\\':	goto yy86;
-			default:	goto yy81;
+			case '\r':	goto yy90;
+			case '"':	goto yy155;
+			case '\\':	goto yy93;
+			default:	goto yy88;
 			}
-yy88:
+yy95:
 			++p;
 			{ m_tokens.emplace_back(TType::DblHash);
         					  m_tokens.back().col = col;
         					  continue; }
-yy90:
+yy97:
 			yych = *++p;
 			switch (yych) {
 			case '0':
@@ -814,50 +873,50 @@ yy90:
 			case 'c':
 			case 'd':
 			case 'e':
-			case 'f':	goto yy90;
-			default:	goto yy92;
+			case 'f':	goto yy97;
+			default:	goto yy99;
 			}
-yy92:
+yy99:
 			{ m_tokens.emplace_back(TType::Integer, a2i(p0+1, 16));
-        					  m_tokens.back().col = col;
-        					  continue; }
-yy93:
-			yych = *++p;
-			switch (yych) {
-			case '"':	goto yy147;
-			case '#':
-			case '-':	goto yy93;
-			default:	goto yy83;
-			}
-yy95:
-			yych = *++p;
-			switch (yych) {
-			case '0':
-			case '1':	goto yy95;
-			default:	goto yy97;
-			}
-yy97:
-			{ m_tokens.emplace_back(TType::Integer, a2i(p0+1, 2));
-        					  m_tokens.back().col = col;
-        					  continue; }
-yy98:
-			++p;
-			{ m_tokens.emplace_back(TType::LogAnd);
         					  m_tokens.back().col = col;
         					  continue; }
 yy100:
 			yych = *++p;
 			switch (yych) {
-			case 0x00:
-			case '\n':
-			case '\r':	goto yy83;
-			case '\'':	goto yy102;
-			case '\\':	goto yy104;
-			default:	goto yy100;
+			case '"':	goto yy156;
+			case '#':
+			case '-':	goto yy100;
+			default:	goto yy90;
 			}
 yy102:
+			yych = *++p;
+			switch (yych) {
+			case '0':
+			case '1':	goto yy102;
+			default:	goto yy104;
+			}
+yy104:
+			{ m_tokens.emplace_back(TType::Integer, a2i(p0+1, 2));
+        					  m_tokens.back().col = col;
+        					  continue; }
+yy105:
 			++p;
-yy103:
+			{ m_tokens.emplace_back(TType::LogAnd);
+        					  m_tokens.back().col = col;
+        					  continue; }
+yy107:
+			yych = *++p;
+			switch (yych) {
+			case 0x00:
+			case '\n':
+			case '\r':	goto yy90;
+			case '\'':	goto yy109;
+			case '\\':	goto yy111;
+			default:	goto yy107;
+			}
+yy109:
+			++p;
+yy110:
 			p1 = yyt1;
 			p2 = p - 1;
 			{
@@ -867,25 +926,25 @@ yy103:
         					  m_tokens.emplace_back(TType::Integer, str[0]);
         					  m_tokens.back().col = col;
         					  continue; }
-yy104:
+yy111:
 			yych = *++p;
 			switch (yych) {
 			case 0x00:
 			case '\n':
-			case '\r':	goto yy83;
-			case '\'':	goto yy149;
-			case '\\':	goto yy104;
-			default:	goto yy100;
+			case '\r':	goto yy90;
+			case '\'':	goto yy158;
+			case '\\':	goto yy111;
+			default:	goto yy107;
 			}
-yy106:
+yy113:
 			++p;
 			{ m_tokens.emplace_back(TType::Pow);
         					  m_tokens.back().col = col;
         					  continue; }
-yy108:
+yy115:
 			yych = *++p;
 			switch (yych) {
-			case '.':	goto yy112;
+			case '.':	goto yy119;
 			case '0':
 			case '1':
 			case '2':
@@ -895,17 +954,17 @@ yy108:
 			case '6':
 			case '7':
 			case '8':
-			case '9':	goto yy108;
-			default:	goto yy83;
+			case '9':	goto yy115;
+			default:	goto yy90;
 			}
-yy110:
+yy117:
 			yych = *++p;
 			switch (yych) {
 			case '\t':
 			case '\v':
 			case '\f':
 			case '\r':
-			case ' ':	goto yy110;
+			case ' ':	goto yy117;
 			case 'A':
 			case 'B':
 			case 'C':
@@ -960,143 +1019,10 @@ yy110:
 			case 'y':
 			case 'z':
 				yyt1 = p;
-				goto yy115;
-			default:	goto yy83;
+				goto yy122;
+			default:	goto yy90;
 			}
-yy112:
-			yyaccept = 7;
-			yych = *(YYMARKER = ++p);
-			switch (yych) {
-			case '0':
-			case '1':
-			case '2':
-			case '3':
-			case '4':
-			case '5':
-			case '6':
-			case '7':
-			case '8':
-			case '9':	goto yy112;
-			case 'E':
-			case 'e':	goto yy150;
-			default:	goto yy114;
-			}
-yy114:
-			{ m_tokens.emplace_back(TType::Floating, atof(p0));
-        					  m_tokens.back().col = col;
-        					  continue; }
-yy115:
-			yych = *++p;
-			switch (yych) {
-			case '0':
-			case '1':
-			case '2':
-			case '3':
-			case '4':
-			case '5':
-			case '6':
-			case '7':
-			case '8':
-			case '9':
-			case 'A':
-			case 'B':
-			case 'C':
-			case 'D':
-			case 'E':
-			case 'F':
-			case 'G':
-			case 'H':
-			case 'I':
-			case 'J':
-			case 'K':
-			case 'L':
-			case 'M':
-			case 'N':
-			case 'O':
-			case 'P':
-			case 'Q':
-			case 'R':
-			case 'S':
-			case 'T':
-			case 'U':
-			case 'V':
-			case 'W':
-			case 'X':
-			case 'Y':
-			case 'Z':
-			case '_':
-			case 'a':
-			case 'b':
-			case 'c':
-			case 'd':
-			case 'e':
-			case 'f':
-			case 'g':
-			case 'h':
-			case 'i':
-			case 'j':
-			case 'k':
-			case 'l':
-			case 'm':
-			case 'n':
-			case 'o':
-			case 'p':
-			case 'q':
-			case 'r':
-			case 's':
-			case 't':
-			case 'u':
-			case 'v':
-			case 'w':
-			case 'x':
-			case 'y':
-			case 'z':	goto yy115;
-			default:	goto yy117;
-			}
-yy117:
-			p1 = yyt1;
-			p2 = p;
-			{
-        					  if (first_token) {
-        					      string str = ident_change_case(string(p1, p2));
-        						  m_tokens.emplace_back(TType::Label, str);
-        					  }
-        					  else {
-        						  p = p0 + 1;
-        					      m_tokens.emplace_back(TType::Dot);
-        					  }
-        					  m_tokens.back().col = col;
-        					  continue; }
-yy118:
-			yych = *++p;
-			switch (yych) {
-			case '0':
-			case '1':
-			case '2':
-			case '3':
-			case '4':
-			case '5':
-			case '6':
-			case '7':
-			case '8':
-			case '9':
-			case 'A':
-			case 'B':
-			case 'C':
-			case 'D':
-			case 'E':
-			case 'F':
-			case 'a':
-			case 'b':
-			case 'c':
-			case 'd':
-			case 'e':
-			case 'f':	goto yy118;
-			case 'H':
-			case 'h':	goto yy123;
-			default:	goto yy83;
-			}
-yy120:
+yy119:
 			yyaccept = 8;
 			yych = *(YYMARKER = ++p);
 			switch (yych) {
@@ -1109,30 +1035,17 @@ yy120:
 			case '6':
 			case '7':
 			case '8':
-			case '9':
-			case 'A':
-			case 'B':
-			case 'C':
-			case 'D':
+			case '9':	goto yy119;
 			case 'E':
-			case 'F':
-			case 'H':
-			case 'a':
-			case 'b':
-			case 'c':
-			case 'd':
-			case 'e':
-			case 'f':
-			case 'h':	goto yy152;
+			case 'e':	goto yy159;
 			default:	goto yy121;
 			}
 yy121:
-			{ m_tokens.emplace_back(TType::Integer, a2i(p0, 2));
+			{ m_tokens.emplace_back(TType::Floating, atof(p0));
         					  m_tokens.back().col = col;
         					  continue; }
 yy122:
-			yyaccept = 5;
-			yych = *(YYMARKER = ++p);
+			yych = *++p;
 			switch (yych) {
 			case '0':
 			case '1':
@@ -1150,19 +1063,67 @@ yy122:
 			case 'D':
 			case 'E':
 			case 'F':
+			case 'G':
+			case 'H':
+			case 'I':
+			case 'J':
+			case 'K':
+			case 'L':
+			case 'M':
+			case 'N':
+			case 'O':
+			case 'P':
+			case 'Q':
+			case 'R':
+			case 'S':
+			case 'T':
+			case 'U':
+			case 'V':
+			case 'W':
+			case 'X':
+			case 'Y':
+			case 'Z':
+			case '_':
 			case 'a':
 			case 'b':
 			case 'c':
 			case 'd':
 			case 'e':
-			case 'f':	goto yy118;
-			case 'H':
-			case 'h':	goto yy123;
-			default:	goto yy40;
+			case 'f':
+			case 'g':
+			case 'h':
+			case 'i':
+			case 'j':
+			case 'k':
+			case 'l':
+			case 'm':
+			case 'n':
+			case 'o':
+			case 'p':
+			case 'q':
+			case 'r':
+			case 's':
+			case 't':
+			case 'u':
+			case 'v':
+			case 'w':
+			case 'x':
+			case 'y':
+			case 'z':	goto yy122;
+			default:	goto yy124;
 			}
-yy123:
-			++p;
-			{ m_tokens.emplace_back(TType::Integer, a2i(p0, 16));
+yy124:
+			p1 = yyt1;
+			p2 = p;
+			{
+        					  if (first_token) {
+        					      string str = ident_change_case(string(p1, p2));
+        						  m_tokens.emplace_back(TType::Label, str);
+        					  }
+        					  else {
+        						  p = p0 + 1;
+        					      m_tokens.emplace_back(TType::Dot);
+        					  }
         					  m_tokens.back().col = col;
         					  continue; }
 yy125:
@@ -1189,11 +1150,47 @@ yy125:
 			case 'c':
 			case 'd':
 			case 'e':
-			case 'f':	goto yy154;
-			default:	goto yy83;
+			case 'f':	goto yy125;
+			case 'H':
+			case 'h':	goto yy130;
+			default:	goto yy90;
 			}
-yy126:
-			yyaccept = 8;
+yy127:
+			yyaccept = 9;
+			yych = *(YYMARKER = ++p);
+			switch (yych) {
+			case '0':
+			case '1':
+			case '2':
+			case '3':
+			case '4':
+			case '5':
+			case '6':
+			case '7':
+			case '8':
+			case '9':
+			case 'A':
+			case 'B':
+			case 'C':
+			case 'D':
+			case 'E':
+			case 'F':
+			case 'H':
+			case 'a':
+			case 'b':
+			case 'c':
+			case 'd':
+			case 'e':
+			case 'f':
+			case 'h':	goto yy161;
+			default:	goto yy128;
+			}
+yy128:
+			{ m_tokens.emplace_back(TType::Integer, a2i(p0, 2));
+        					  m_tokens.back().col = col;
+        					  continue; }
+yy129:
+			yyaccept = 5;
 			yych = *(YYMARKER = ++p);
 			switch (yych) {
 			case '0':
@@ -1217,46 +1214,111 @@ yy126:
 			case 'c':
 			case 'd':
 			case 'e':
-			case 'f':	goto yy118;
+			case 'f':	goto yy125;
 			case 'H':
-			case 'h':	goto yy123;
-			default:	goto yy121;
+			case 'h':	goto yy130;
+			default:	goto yy41;
 			}
-yy127:
+yy130:
+			++p;
+			{ m_tokens.emplace_back(TType::Integer, a2i(p0, 16));
+        					  m_tokens.back().col = col;
+        					  continue; }
+yy132:
+			yych = *++p;
+			switch (yych) {
+			case '0':
+			case '1':
+			case '2':
+			case '3':
+			case '4':
+			case '5':
+			case '6':
+			case '7':
+			case '8':
+			case '9':
+			case 'A':
+			case 'B':
+			case 'C':
+			case 'D':
+			case 'E':
+			case 'F':
+			case 'a':
+			case 'b':
+			case 'c':
+			case 'd':
+			case 'e':
+			case 'f':	goto yy163;
+			default:	goto yy90;
+			}
+yy133:
+			yyaccept = 9;
+			yych = *(YYMARKER = ++p);
+			switch (yych) {
+			case '0':
+			case '1':
+			case '2':
+			case '3':
+			case '4':
+			case '5':
+			case '6':
+			case '7':
+			case '8':
+			case '9':
+			case 'A':
+			case 'B':
+			case 'C':
+			case 'D':
+			case 'E':
+			case 'F':
+			case 'a':
+			case 'b':
+			case 'c':
+			case 'd':
+			case 'e':
+			case 'f':	goto yy125;
+			case 'H':
+			case 'h':	goto yy130;
+			default:	goto yy128;
+			}
+yy134:
 			++p;
 			{ m_tokens.emplace_back(TType::Shl);
         					  m_tokens.back().col = col;
         					  continue; }
-yy129:
+yy136:
 			++p;
 			{ m_tokens.emplace_back(TType::Le);
         					  m_tokens.back().col = col;
         					  continue; }
-yy131:
+yy138:
 			++p;
-			goto yy52;
-yy132:
+			goto yy53;
+yy139:
 			++p;
 			{ m_tokens.emplace_back(TType::Ge);
         					  m_tokens.back().col = col;
         					  continue; }
-yy134:
+yy141:
 			++p;
 			{ m_tokens.emplace_back(TType::Shr);
         					  m_tokens.back().col = col;
         					  continue; }
-yy136:
+yy143:
 			yych = *++p;
 			switch (yych) {
 			case '\t':
 			case '\v':
 			case '\f':
 			case '\r':
-			case ' ':	goto yy136;
-			case ':':	goto yy138;
-			default:	goto yy83;
+			case ' ':	goto yy143;
+			case ':':	goto yy146;
+			default:	goto yy90;
 			}
-yy138:
+yy145:
+			++p;
+			goto yy60;
+yy146:
 			++p;
 			p1 = yyt1;
 			{
@@ -1271,42 +1333,53 @@ yy138:
         					  }
         					  m_tokens.back().col = col;
         					  continue; }
-yy140:
-			yyaccept = 6;
+yy148:
+			yyaccept = 7;
 			yych = *(YYMARKER = ++p);
 			switch (yych) {
-			case '\'':	goto yy157;
-			default:	goto yy61;
+			case 'F':
+			case 'f':	goto yy64;
+			default:	goto yy66;
 			}
-yy141:
-			yyaccept = 6;
+yy149:
+			yyaccept = 7;
 			yych = *(YYMARKER = ++p);
 			switch (yych) {
-			case '.':	goto yy158;
-			default:	goto yy61;
+			case '.':	goto yy166;
+			default:	goto yy66;
 			}
-yy142:
+yy150:
+			yyaccept = 7;
+			yych = *(YYMARKER = ++p);
+			switch (yych) {
+			case 'A':
+			case 'a':	goto yy64;
+			case 'C':
+			case 'c':	goto yy167;
+			default:	goto yy66;
+			}
+yy151:
 			++p;
 			{ m_tokens.emplace_back(TType::LogXor);
         					  m_tokens.back().col = col;
         					  continue; }
-yy144:
+yy153:
 			++p;
 			{ m_tokens.emplace_back(TType::LogOr);
         					  m_tokens.back().col = col;
         					  continue; }
-yy146:
-			yyaccept = 9;
+yy155:
+			yyaccept = 10;
 			yych = *(YYMARKER = ++p);
 			switch (yych) {
 			case 0x00:
 			case '\n':
-			case '\r':	goto yy85;
-			case '"':	goto yy84;
-			case '\\':	goto yy86;
-			default:	goto yy81;
+			case '\r':	goto yy92;
+			case '"':	goto yy91;
+			case '\\':	goto yy93;
+			default:	goto yy88;
 			}
-yy147:
+yy156:
 			++p;
 			p1 = p - 1;
 			{
@@ -1318,22 +1391,22 @@ yy147:
         					  m_tokens.emplace_back(TType::Integer, n);
         					  m_tokens.back().col = col;
         					  continue; }
-yy149:
-			yyaccept = 10;
+yy158:
+			yyaccept = 11;
 			yych = *(YYMARKER = ++p);
 			switch (yych) {
 			case 0x00:
 			case '\n':
-			case '\r':	goto yy103;
-			case '\'':	goto yy102;
-			case '\\':	goto yy104;
-			default:	goto yy100;
+			case '\r':	goto yy110;
+			case '\'':	goto yy109;
+			case '\\':	goto yy111;
+			default:	goto yy107;
 			}
-yy150:
+yy159:
 			yych = *++p;
 			switch (yych) {
 			case '+':
-			case '-':	goto yy159;
+			case '-':	goto yy168;
 			case '0':
 			case '1':
 			case '2':
@@ -1343,16 +1416,16 @@ yy150:
 			case '6':
 			case '7':
 			case '8':
-			case '9':	goto yy160;
-			default:	goto yy83;
+			case '9':	goto yy169;
+			default:	goto yy90;
 			}
-yy151:
-			yyaccept = 11;
+yy160:
+			yyaccept = 12;
 			yych = *(YYMARKER = ++p);
-yy152:
+yy161:
 			switch (yych) {
 			case '0':
-			case '1':	goto yy151;
+			case '1':	goto yy160;
 			case '2':
 			case '3':
 			case '4':
@@ -1372,16 +1445,16 @@ yy152:
 			case 'c':
 			case 'd':
 			case 'e':
-			case 'f':	goto yy118;
+			case 'f':	goto yy125;
 			case 'H':
-			case 'h':	goto yy123;
-			default:	goto yy153;
+			case 'h':	goto yy130;
+			default:	goto yy162;
 			}
-yy153:
+yy162:
 			{ m_tokens.emplace_back(TType::Integer, a2i(p0+2, 2));
         					  m_tokens.back().col = col;
         					  continue; }
-yy154:
+yy163:
 			yych = *++p;
 			switch (yych) {
 			case '0':
@@ -1405,17 +1478,14 @@ yy154:
 			case 'c':
 			case 'd':
 			case 'e':
-			case 'f':	goto yy154;
-			default:	goto yy156;
+			case 'f':	goto yy163;
+			default:	goto yy165;
 			}
-yy156:
+yy165:
 			{ m_tokens.emplace_back(TType::Integer, a2i(p0+2, 16));
         					  m_tokens.back().col = col;
         					  continue; }
-yy157:
-			++p;
-			goto yy59;
-yy158:
+yy166:
 			yych = *++p;
 			switch (yych) {
 			case 'B':
@@ -1425,10 +1495,18 @@ yy158:
 			case 'b':
 			case 'p':
 			case 'q':
-			case 'w':	goto yy157;
-			default:	goto yy83;
+			case 'w':	goto yy145;
+			default:	goto yy90;
 			}
-yy159:
+yy167:
+			yyaccept = 7;
+			yych = *(YYMARKER = ++p);
+			switch (yych) {
+			case 'A':
+			case 'a':	goto yy64;
+			default:	goto yy66;
+			}
+yy168:
 			yych = *++p;
 			switch (yych) {
 			case '0':
@@ -1440,10 +1518,10 @@ yy159:
 			case '6':
 			case '7':
 			case '8':
-			case '9':	goto yy160;
-			default:	goto yy83;
+			case '9':	goto yy169;
+			default:	goto yy90;
 			}
-yy160:
+yy169:
 			yych = *++p;
 			switch (yych) {
 			case '0':
@@ -1455,8 +1533,8 @@ yy160:
 			case '6':
 			case '7':
 			case '8':
-			case '9':	goto yy160;
-			default:	goto yy114;
+			case '9':	goto yy169;
+			default:	goto yy121;
 			}
 		}
 

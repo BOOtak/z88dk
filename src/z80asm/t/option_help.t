@@ -45,6 +45,16 @@ Help Options:
   -h                     Show help options
   -v                     Be verbose
 
+Preprocessor Options:
+  -E                     Preprocess only to file.i
+  -IPATH                 Add directory to include search path
+  -DSYMBOL[=VALUE]       Define a static symbol
+  -ucase                 Convert all symbols to upper case
+  -float=ieee32          Convert floats to IEEE-754 32-bit format
+  -float=ieee64          Convert floats to IEEE-754 64-bit format
+  -float=zx81            Convert floats to ZX-81 40-bit format
+  -float=zx              Convert floats to ZX-Spectrum 40-bit format
+
 Code Generation Options:
   -mz80n                 Assemble for the Z80 variant of ZX Next
   -mz80                  Assemble for the Z80
@@ -60,12 +70,8 @@ Code Generation Options:
   -opt-speed             Optimize for speed
   -debug                 Add debug info to map file
 
-Environment:
-  -IPATH                 Add directory to include search path
-  -LPATH                 Add directory to library search path
-  -DSYMBOL[=VALUE]       Define a static symbol
-
 Libraries:
+  -LPATH                 Add directory to library search path
   -xFILE                 Create a library file.lib
   -lFILE                 Use library file.lib
 

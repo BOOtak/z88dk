@@ -32,11 +32,11 @@ END
 	check_bin_file("test.bin", pack("C*", 0, 1));
 
 	z80asm("xx: $DEFB \"", "", 1, "", <<END);
-Error at file 'test.asm' line 1: unclosed quoted string
+test.asm:1: error: unbalanced quote
 END
 
 	z80asm("xx: $DEFB \"hello", "", 1, "", <<END);
-Error at file 'test.asm' line 1: unclosed quoted string
+test.asm:1: error: unbalanced quote
 END
 
 	# escape chars

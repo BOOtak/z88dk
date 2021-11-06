@@ -14,7 +14,7 @@ z80asm_nok("", "", <<END,
     INCLUDE "${test}.inc"
 END
            <<END);
-Error at file '${test}.asm' line 1: cannot read file '${test}.inc'
+${test}.asm:1: error: file not found: ${test}.inc
 END
 
 unlink "${test}.bin";
@@ -22,7 +22,7 @@ z80asm_nok("", "", <<END,
     BINARY "${test}.bin"
 END
            <<END);
-Error at file '${test}.asm' line 1: cannot read file '${test}.bin'
+${test}.asm:1: error: file not found: ${test}.bin
 END
 
 unlink "${test}.lib";

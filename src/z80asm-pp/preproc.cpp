@@ -11,6 +11,7 @@
 #include "utils.h"
 #include <algorithm>
 #include <cassert>
+#include <cctype>
 #include <iostream>
 #include <sstream>
 using namespace std;
@@ -1407,50 +1408,66 @@ void Preproc::do_repti() {
 	m_levels.back().init(line1);
 }
 
+TType Preproc::do_def_common() {
+	while (true) {
+		TType ttype = next_token_getline();
+
+		// check for LINE/C_LINE
+		if (check_line() || check_c_line())
+			continue;
+
+		// check for empty line
+		if (lexer().at_end())
+			continue;
+
+		return ttype;
+	}
+}
+
 void Preproc::do_defgroup() {
 	if (next_token_getline() != TType::Lbrace)
 		throw Error(ECode::LbraceExpected);
 	lexer().next();
 
 	int value = 0;
-	while (true) {
-		next_token_getline();
-
-		// check for LINE/C_LINE
-		if (check_line() || check_c_line())
-			continue;
-		
-		// get name[=expression]
-		string name = expect_ident();
-		if (lexer().peek().ttype == TType::Eq) {
-			lexer().next();
-			value = expect_const_expr(false);
-		}
-
-		// output defc name=expression
-		Line line1 = line();
-		line1.text = "defc " + name + "=" + std::to_string(value);
-		m_output.push_back(line1);
-
-		// store symbol
-		auto symbol = make_shared<Symbol>(name);
-		symbol->value() = Value(value);
-		m_symtab.add(symbol);
-
-		value++;
-
-		// expect comma or rbrace
-		TType ttype = next_token_getline();
-		if (ttype == TType::Comma) {
-			lexer().next();
-			continue;
-		}
-		else if (ttype == TType::Rbrace) {
+	while (true) {	// parse {}
+		TType ttype = do_def_common();
+		if (ttype == TType::Rbrace) {
 			lexer().next();
 			break;
 		}
-		else
+		else if (ttype != TType::Ident)
 			throw Error(ECode::RbraceOrCommaExpected);
+
+		while (!lexer().at_end()) {	// parse line
+			// get name[=expression]
+			string name = expect_ident();
+			if (lexer().peek().ttype == TType::Eq) {
+				lexer().next();
+				value = expect_const_expr(false);
+			}
+
+			// output defc name=expression
+			Line line1 = line();
+			line1.text = "defc " + name + "=" + std::to_string(value);
+			m_output.push_back(line1);
+
+			// store symbol
+			auto symbol = make_shared<Symbol>(name);
+			symbol->value() = Value(value);
+			m_symtab.add(symbol);
+
+			value++;
+
+			if (lexer().at_end())
+				break;
+			else if (lexer().peek().ttype == TType::Comma) {
+				lexer().next();
+				continue;
+			}
+			else 
+				throw Error(ECode::RbraceOrCommaExpected);
+		}
 	}
 	expect_eol();
 }
@@ -1466,12 +1483,12 @@ void Preproc::do_defvars() {
 	lexer().next();
 
 	int value = origin < 0 ? m_defvars_value : origin;
-	while (true) {
-		next_token_getline();
-
-		// check for LINE/C_LINE
-		if (check_line() || check_c_line())
-			continue;
+	while (true) {	// parse {}
+		TType ttype = do_def_common();
+		if (ttype == TType::Rbrace) {
+			lexer().next();
+			break;
+		}
 
 		// get [name] size_id count
 		string name;
@@ -1501,16 +1518,7 @@ void Preproc::do_defvars() {
 		if (origin != 0)
 			m_defvars_value = value;
 
-		// expect comma or rbrace
-		TType ttype = next_token_getline();
-		if (ttype == TType::Ident) 
-			continue;
-		else if (ttype == TType::Rbrace) {
-			lexer().next();
-			break;
-		}
-		else
-			throw Error(ECode::RbraceOrIdentExpected);
+		expect_eol();
 	}
 	expect_eol();
 }

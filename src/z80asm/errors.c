@@ -123,6 +123,11 @@ int get_num_errors( void )
     return errors.count;
 }
 
+void inc_error_count(void) {
+	init_module();
+	errors.count++;
+}
+
 /*-----------------------------------------------------------------------------
 *	Open file to receive all errors / warnings from now on
 *	File is appended, to allow assemble	and link errors to be joined in the same file.

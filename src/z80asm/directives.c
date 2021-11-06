@@ -22,6 +22,7 @@ Assembly directives.
 #include "types.h"
 #include "utstring.h"
 #include "z80asm.h"
+#include <assert.h>
 
 static void check_org_align();
 
@@ -359,8 +360,52 @@ void asm_DC(const char* name, Expr* expr)
 /*-----------------------------------------------------------------------------
 *   DEFS - create a block of empty bytes, called by the DEFS directive
 *----------------------------------------------------------------------------*/
-void asm_DEFS(int count, int fill)
-{
+void asm_DEFS_list(ParseCtx* ctx) {
+	/* evaluate expressions as contant, store results */
+	size_t num_exprs = utarray_len(ctx->exprs);
+	assert(num_exprs > 0);
+
+	int* values = xcalloc(num_exprs, sizeof(int));
+	bool ok = true;
+	for (int i = (int)num_exprs - 1; ok && i >= 0; i--) {
+		bool error;
+		pop_eval_expr(ctx, &values[i], &error);
+		if (error) {
+			error_expected_const_expr();
+			ok = false;
+		}
+	}
+
+	if (ok) {
+		int count = values[0];
+		if (count < 0 || count > 0x10000)
+			error_int_range(count);
+		else {
+			if (num_exprs == 1) 
+				asm_DEFS(count, opts.filler);
+			else if (num_exprs == 2) {
+				int fill = values[1];
+				asm_DEFS(count, fill);
+			}
+			else {	/* DEFS n, string -> converted by z80asm-pp to DEFS n, b1,b2,b3,... */
+				int len = (num_exprs - 1);
+				if (count < len)
+					error_string_too_long();
+				else {
+					int zeros = count - len;
+					for (size_t i = 1; i < num_exprs; i++)
+						add_opcode(values[i] & 0xff);
+					while (zeros-- > 0)
+						add_opcode(opts.filler);
+				}
+			}
+		}
+	}
+
+	xfree(values);
+}
+
+void asm_DEFS(int count, int fill) {
 	if (count < 0 || count > 0x10000)
 		error_int_range(count);
 	else if (fill < -128 || fill > 255)
@@ -369,6 +414,7 @@ void asm_DEFS(int count, int fill)
 		append_defs(count, fill);
 }
 
+/*
 void asm_DEFS_str(int count, const char* str, int len)
 {
 	if (count < 0 || count > 0x10000)
@@ -383,6 +429,7 @@ void asm_DEFS_str(int count, const char* str, int len)
             add_opcode(opts.filler);
     }
 }
+*/
 
 
 /*-----------------------------------------------------------------------------

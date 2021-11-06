@@ -168,7 +168,7 @@ t_asmpp_ok(<<'...', "",
 		"\x34\x33" .						# line 20
 		""
 );
-is_text(scalar(read_file("test.i")), <<'...');
+is_text(scalar(read_file("test.ii")), <<'...');
 ;;test.asm:1
 		defc value = 4660
 ;;test.asm:2
@@ -218,7 +218,7 @@ t_asmpp_ok(<<'...', "-r0x1234", "\x12\x34\x12\x36");
 		defb .high.$,.low.asmpc
 		DEFB .HIGH.$,.LOW.ASMPC
 ...
-is_text(scalar(read_file("test.i")), <<'...');
+is_text(scalar(read_file("test.ii")), <<'...');
 ;;test.asm:1
 AUTOLABEL_pc_1:
 		defb (((( AUTOLABEL_pc_1 ) >> 8) & 255)),((( AUTOLABEL_pc_1 ) & 255))
@@ -244,7 +244,7 @@ val		defl val+1
 val		defl val+1
 		defw val
 ...
-is_text(scalar(read_file("test.i")), <<'...');
+is_text(scalar(read_file("test.ii")), <<'...');
 ;;test.asm:2
 		defb 1
 ;;test.asm:4
@@ -268,7 +268,7 @@ t_asmpp_ok(<<'...', "-Done -Dtwo=2 -Dthree=0x2+1", "\1\2\3\1\2\3");
 		defb one,two,three
 		DEFB one,two,three
 ...
-is_text(scalar(read_file("test.i")), <<'...');
+is_text(scalar(read_file("test.ii")), <<'...');
 ;;test.asm:1
 		defb 1,2,3
 ;;test.asm:2
@@ -283,7 +283,7 @@ t_asmpp_ok(<<'...', "", "\1\2\3\4");
 		end
 		defb 5,6,7,8
 ...
-is_text(scalar(read_file("test.i")), <<'...');
+is_text(scalar(read_file("test.ii")), <<'...');
 ;;test.asm:1
 		defb 1,2,3,4
 ...
@@ -293,7 +293,7 @@ t_asmpp_ok(<<'...', "", "\1\2\3\4");
 label:	end
 		defb 5,6,7,8
 ...
-is_text(scalar(read_file("test.i")), <<'...');
+is_text(scalar(read_file("test.ii")), <<'...');
 ;;test.asm:1
 		defb 1,2,3,4
 ...
@@ -303,7 +303,7 @@ start:	defb 1,2,3,4
 label:	end start
 		defb 5,6,7,8
 ...
-is_text(scalar(read_file("test.i")), <<'...');
+is_text(scalar(read_file("test.ii")), <<'...');
 ;;test.asm:1
 start:	defb 1,2,3,4
 ...
@@ -359,7 +359,7 @@ three:	EQU 10/3
 		"\0\0\0\0\1".
 		"\1\2\3".
 		"");
-is_text(scalar(read_file("test.i")), <<'...');
+is_text(scalar(read_file("test.ii")), <<'...');
 ;;test.asm:1
 lbl1:	DEFW 4660
 ;;test.asm:2
@@ -420,7 +420,7 @@ lbl9:	DEFS 4
 t_asmpp_ok(<<'...', "", "\0");
 		nop
 ...
-is_text(scalar(read_file("test.i")), <<'...');
+is_text(scalar(read_file("test.ii")), <<'...');
 ;;test.asm:1
 		nop
 ...
@@ -428,7 +428,7 @@ is_text(scalar(read_file("test.i")), <<'...');
 t_asmpp_ok(<<'...', "--ucase", "\0");
 		nop
 ...
-is_text(scalar(read_file("test.i")), <<'...');
+is_text(scalar(read_file("test.ii")), <<'...');
 ;;test.asm:1
 		NOP
 ...
@@ -441,7 +441,7 @@ ok 0 == system($cmd), $cmd;
 t_binary(read_binfile("CAMEL80.bin"), 
 		 read_binfile("t/data/CAMEL80.COM"));
 
-unlink_testfiles(qw( CAMEL80.i CAMEL80.o CAMEL80.sym CAMEL80.lis CAMEL80.map CAMEL80.bin CAMEL80.reloc ));
+unlink_testfiles(qw( CAMEL80.ii CAMEL80.o CAMEL80.sym CAMEL80.lis CAMEL80.map CAMEL80.bin CAMEL80.reloc ));
 done_testing();
 exit 0;
 

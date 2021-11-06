@@ -163,52 +163,104 @@ static void query_assemble(const char *src_filename )
 }
 
 /*-----------------------------------------------------------------------------
+*	Preprocess one file
+*----------------------------------------------------------------------------*/
+static bool preprocess(const char* src_filename) {
+	const char* i_filename = get_i_filename(src_filename);
+
+	if (opts.verbose)
+		printf("Preprocessing '%s' to '%s'\n", path_canon(src_filename), path_canon(i_filename));
+
+	/* make sure we receive subprocess stderr */
+	const char* err_filename = path_replace_ext(src_filename, ".err~");
+
+	/* build z80asmpp command line */
+	UT_string* z80asm_pp;
+	utstring_new(z80asm_pp);
+	utstring_printf(z80asm_pp, "%s %s 2> %s", z80asm_pp_cmd(), src_filename, err_filename);
+
+	if (opts.verbose)
+		printf("%s\n", utstring_body(z80asm_pp));
+
+	/* call z80asmpp */
+	bool asmpp_ok = true;
+	if (system(utstring_body(z80asm_pp)) != 0) {
+		inc_error_count();
+		asmpp_ok = false;
+	}
+
+	/* show subprocess stderr */
+	FILE *fp = fopen(err_filename, "r");
+	if (fp) {
+		char buffer[BUFSIZ];
+		while (fgets(buffer, sizeof(buffer), fp)) {
+			fputs(buffer, stderr);
+		}
+		fclose(fp);
+	}
+	remove(err_filename);
+
+	/* free memory */
+	utstring_free(z80asm_pp);
+	return asmpp_ok;
+}
+
+/*-----------------------------------------------------------------------------
 *	Assemble one file
 *----------------------------------------------------------------------------*/
 static void do_assemble(const char *src_filename )
 {
     int start_errors = get_num_errors();     /* count errors in this source file */
 	const char *obj_filename = get_obj_filename(src_filename);
+	const char *i_filename = get_i_filename(src_filename);
+
+	/* run preprocessor */
+	if (!preprocess(src_filename))
+		return;
 
 	clear_macros();
 
-	/* create list file */
-	if (opts.list)
-		list_open(get_list_filename(src_filename));
+	if (!opts.preprocess_only) {
+		/* create list file */
+		if (opts.list)
+			list_open(get_list_filename(src_filename));
 
-	/* initialize local symtab with copy of static one (-D defines) */
-	copy_static_syms();
+		/* initialize local symtab with copy of static one (-D defines) */
+		copy_static_syms();
 
-	/* Init ASMPC */
-	set_PC(0);
+		/* Init ASMPC */
+		set_PC(0);
 
-	if (opts.verbose)
-		printf("Assembling '%s' to '%s'\n", path_canon(src_filename), path_canon(obj_filename));
+		if (opts.verbose)
+			printf("Assembling '%s' to '%s'\n", path_canon(i_filename), path_canon(obj_filename));
 
-	parse_file(src_filename);
+		parse_file(i_filename);
 
-	list_end();						/* get_used_symbol will only generate page references until list_end() */
+		list_end();						/* get_used_symbol will only generate page references until list_end() */
 
-	asm_MODULE_default();			/* Module name must be defined */
+		asm_MODULE_default();			/* Module name must be defined */
 
-	set_error_null();
-	//set_error_module( CURRENTMODULE->modname );
+		set_error_null();
+		//set_error_module( CURRENTMODULE->modname );
 
-	Z80pass2();						/* call pass 2 even if errors found, to issue pass2 errors */
-	
-	/*
-	* Source file no longer needed (file could already have been closed, if error occurred during INCLUDE
-	* processing).
-	*/
+		Z80pass2();						/* call pass 2 even if errors found, to issue pass2 errors */
+
+										/*
+										* Source file no longer needed (file could already have been closed, if error occurred during INCLUDE
+										* processing).
+										*/
+	}
 
 	set_error_null();
 
 	/* remove list file if more errors now than before */
 	list_close(start_errors == get_num_errors());
 
-	/* remove incomplete object file */
+	
 	if (start_errors != get_num_errors())
-		remove(get_obj_filename(src_filename));
+		remove(obj_filename);		/* remove incomplete object file */
+	else if (!opts.preprocess_only)
+		remove(i_filename);			/* remove preprocessed file */
 
 	close_error_file();
 
@@ -237,38 +289,40 @@ int z80asm_main( int argc, char *argv[] )
 			assemble_file(*pfile);
 	}
 
-	/* Create output file */
-	if (!get_num_errors()) {
-		if (opts.lib_file) {
-			make_library(opts.lib_file, opts.files);
-		}
-		else if (opts.make_bin) {
-			xassert(opts.consol_obj_file == NULL);
-			link_modules();			
+	if (!opts.preprocess_only) {
+		/* Create output file */
+		if (!get_num_errors()) {
+			if (opts.lib_file) {
+				make_library(opts.lib_file, opts.files);
+			}
+			else if (opts.make_bin) {
+				xassert(opts.consol_obj_file == NULL);
+				link_modules();
 
-			if (!get_num_errors())
-				CreateBinFile();
+				if (!get_num_errors())
+					CreateBinFile();
 
-			if (!get_num_errors())
-				checkrun_appmake();		/* call appmake if requested in the options */
-		}
-		else if (opts.bin_file) {	// -o consolidated obj
-			opts.consol_obj_file = get_obj_filename(opts.bin_file);
-			opts.bin_file = NULL;
+				if (!get_num_errors())
+					checkrun_appmake();		/* call appmake if requested in the options */
+			}
+			else if (opts.bin_file) {	// -o consolidated obj
+				opts.consol_obj_file = get_obj_filename(opts.bin_file);
+				opts.bin_file = NULL;
 
-			xassert(opts.consol_obj_file != NULL);
-			link_modules();
+				xassert(opts.consol_obj_file != NULL);
+				link_modules();
 
-			set_cur_module(get_first_module(NULL));
-			
-			CURRENTMODULE->filename = get_asm_filename(opts.consol_obj_file);
-			CURRENTMODULE->modname = path_remove_ext(path_file(CURRENTMODULE->filename));
+				set_cur_module(get_first_module(NULL));
 
-			if (!get_num_errors())
-				write_obj_file(opts.consol_obj_file);
+				CURRENTMODULE->filename = get_asm_filename(opts.consol_obj_file);
+				CURRENTMODULE->modname = path_remove_ext(path_file(CURRENTMODULE->filename));
 
-			if (!get_num_errors() && opts.symtable)
-				write_sym_file(CURRENTMODULE);
+				if (!get_num_errors())
+					write_obj_file(opts.consol_obj_file);
+
+				if (!get_num_errors() && opts.symtable)
+					write_sym_file(CURRENTMODULE);
+			}
 		}
 	}
 

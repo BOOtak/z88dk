@@ -32,6 +32,7 @@ X(SizeIdExpected, "'ds.[bwpq]' expected")
 X(StringExpected, "string expected")
 X(StructNesting, "structure nesting")
 X(UnbalancedParens, "unbalanced parens")
+X(UnbalancedQuote, "unbalanced quote")
 X(WrongNumberMacroArgs, "wrong number of macro arguments")
 
 #undef X

@@ -91,7 +91,7 @@ spew("test_dir/test1.dat", "hello");
 z80asm(<<END, "-b", 1, "", <<END);
 		binary "test1.dat"
 END
-Error at file 'test.asm' line 1: cannot read file 'test1.dat'
+test.asm:1: error: file not found: test1.dat
 END
 
 z80asm(<<END, "-b -Itest_dir");

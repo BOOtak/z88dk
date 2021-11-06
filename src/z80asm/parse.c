@@ -28,6 +28,7 @@ Define ragel-based parser.
 #include "zutils.h"
 
 #include <ctype.h>
+#include <assert.h>
 
 /*-----------------------------------------------------------------------------
 * 	Array of tokens
@@ -169,7 +170,7 @@ static Expr *pop_expr(ParseCtx *ctx)
 /*-----------------------------------------------------------------------------
 *   Pop and compute expression, issue error on failure
 *----------------------------------------------------------------------------*/
-static void pop_eval_expr(ParseCtx *ctx, int *pvalue, bool *perror)
+void pop_eval_expr(ParseCtx *ctx, int *pvalue, bool *perror)
 {
 	Expr *expr;
 

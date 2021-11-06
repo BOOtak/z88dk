@@ -298,6 +298,7 @@ Define rules for a ragel-based parser.
 	/*---------------------------------------------------------------------
 	*   DEFS
 	*--------------------------------------------------------------------*/
+	/*
 	asm_DEFS =
 		  label? (_TK_DEFS | _TK_DS) const_expr _TK_NEWLINE
 		  @{ DO_STMT_LABEL();
@@ -330,6 +331,21 @@ Define rules for a ragel-based parser.
 			 Str_len(name) = str_compress_escapes(Str_data(name));
 			 asm_DEFS_str(value1, Str_data(name), Str_len(name)); }
 		;
+	*/
+	asm_DEFS_iter =
+			asm_DEFS_next:
+			(	expr (_TK_COMMA | _TK_NEWLINE)
+				@{	DO_STMT_LABEL();
+					if (ctx->p->tok == TK_COMMA)
+						fgoto asm_DEFS_next;
+				}
+			|	string _TK_NEWLINE		/* accept "" as last parameter */
+				@{	DO_STMT_LABEL();
+					assert(Str_len(name)==0);
+				}
+			);
+	asm_DEFS =	label? (_TK_DEFS | _TK_DS) asm_DEFS_iter
+				@{ asm_DEFS_list(ctx); };
 
 	/*---------------------------------------------------------------------
 	*   BYTE / DEFB / DEFM / DB / DM

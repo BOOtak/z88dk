@@ -23,7 +23,23 @@ using namespace std;
 
 	ident 	= [_a-zA-Z][_a-zA-Z0-9]*;
 	operand	= ident |
+			  'b\'' |
+			  'c\'' |
+			  'd\'' |
+			  'e\'' |
+			  'h\'' |
+			  'l\'' |
+			  'a\'' |
 			  'af\'' |
+			  'bc\'' |
+			  'de\'' |
+			  'hl\'' |
+			  'ccf\'' |
+			  'scf\'' |
+			  'rra\'' |
+			  'rrca\'' |
+			  'rla\'' |
+			  'rlca\'' |
 			  'ds.b' |
 			  'ds.w' |
 			  'ds.p' |
@@ -282,7 +298,11 @@ void Lexer::set(const string& text) {
         					  m_tokens.back().col = col;
         					  continue; }
 
+		"'" |
+		'"'				{ throw Error(ECode::UnbalancedQuote); }
+
         	*				{ throw Error(ECode::InvalidChar); }
+		
         */
     }
 }

@@ -58,3 +58,5 @@ extern struct Expr *parse_expr(const char *expr_text);
 
 /* return new auto-label in strpool */
 extern const char *autolabel(void);
+
+extern void pop_eval_expr(ParseCtx* ctx, int* pvalue, bool* perror);

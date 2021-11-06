@@ -28,12 +28,16 @@ END_ERR
 
 asmpp_ok("", "", "", <<END_ASM, <<END_I);
 l1: defgroup { 
-a2=2 
+a1=1,a2=2
+a3=3,
 }
 END_ASM
 line 1,"$test.asm"
 l1:
+defc a1=1
+line 2
 defc a2=2
+defc a3=3
 END_I
 
 asmpp_ok("", "", "", <<END_ASM, <<END_I);
